@@ -1,0 +1,12 @@
+{
+  "name": "battlechain.match-pool",
+  "version": "0.0.1",
+  "description": "Match pool",
+  "main": "index.js",
+  "scripts": {
+    /** Include Mocha tests here */
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "lmlouzao",
+  "license": "ISC"
+}
