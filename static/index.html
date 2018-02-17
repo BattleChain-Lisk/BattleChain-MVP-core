@@ -1,0 +1,112 @@
+<html>
+
+    <head>
+        <!-- Initializes sockect io. Se obtiene el JS a partir de la ruta concreta que nos sirve el server http -->
+        <script src="/socket.io/socket.io.js"></script>
+
+        <style>
+            table {
+               border: solid 1px black;
+            }
+            td {
+                padding: 0 2em;
+            }
+            tr, th {
+                border-bottom: solid 1px black;
+            }
+            input, select{
+                margin-bottom: 0.5em;
+            }
+        </style>
+        <script>
+                
+                        var socket = io();
+                        console.log('Socket initialized');
+
+
+                        function addRowToTable(txt1, txt2, txt3){    
+                            var col1 = document.createElement('td');
+                            col1.appendChild( document.createTextNode(txt1) );
+                            var col2 = document.createElement('td');
+                            col2.appendChild( document.createTextNode(txt2) );
+                            var col3 = document.createElement('td');
+                            col3.appendChild( document.createTextNode(txt3) );
+
+                            var row = document.createElement('tr');
+                            row.appendChild(col1);
+                            row.appendChild(col2);
+                            row.appendChild(col3);
+
+                            var table = document.getElementById('match-list-table').appendChild(row);
+                        }
+
+
+                        function createMatch(){
+
+                            let player = document.getElementById('player').value;
+                            let game = document.getElementById('game').value;
+                            let ammount = document.getElementById('ammount').value;
+
+                            let msg = {
+                                player: player,
+                                ammount: ammount,
+                                game: game
+                            };
+                            socket.emit('create-match', msg);
+                            console.log('Match creation msg sent');
+                        }
+
+                        socket.on('broadcast', function(data){
+                            console.log('new match created: '+ JSON.stringify(data));
+                            addRowToTable(data.player, data.game, data.ammount);
+                        });
+                
+        </script>
+
+    </head>
+
+
+    <body>
+        <h1>BattleChain Match Visualization</h1>
+        
+
+        <div id="match-creation">
+            <h2>Match creation</h2>
+            <form id="match-creation-data">
+                <label for="player">Player</label>
+                <input type="text" name="player" id="player" value="lou_z">
+                <br>
+                <label for="game">Game</label>
+                <select id="game" name="game">
+                    <option value="">Select one...</option>
+                    <option value="apple-birds">Apple birds</option>
+                    <option value="arkanoid">Arkanoid</option>
+                    <option selected value="lisk-invaders">Lisk invaders</option>
+                </select>
+                <br>
+                <label for="ammount">Ammount</label>
+                <input type="text" name="ammount" id="ammount" value="999">
+                <br>
+                <input type="button" id="create-match-action" onclick="createMatch()" value="Create match">
+            </form>     
+        </div>
+
+
+        <div id="match-list">
+            <h2>Current matches</h2>
+            <table id="match-list-table">
+                <tr>
+                    <th>Player</th>
+                    <th>Game</th>
+                    <th>Ammount</th>
+                </tr>
+                <tr>
+                    <td>Mocked Player</td>
+                    <td>Lisk Invaders</td>
+                    <td>666 LSK</td>
+                </tr>
+            </table>
+        </div>
+    </body>
+
+</html>

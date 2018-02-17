@@ -4,9 +4,15 @@
   "description": "Match pool",
   "main": "index.js",
   "scripts": {
-    /** Include Mocha tests here */
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha ./test/**/*.test.js"
   },
   "author": "lmlouzao",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "chai": "^4.1.2",
+    "config.json": "0.0.4",
+    "express": "^4.16.2",
+    "mocha": "^5.0.0",
+    "socket.io": "^2.0.4"
+  }
 }

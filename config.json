@@ -1,0 +1,8 @@
+{
+    "match_pool": {
+        "MAX_CAPACITY_POOL": 1000,
+        "MATCH_TTL_IN_SECONDS": 60,
+        "LOOP_TIME": 1000 // Every minute
+    }
+
+}

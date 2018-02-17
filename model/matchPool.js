@@ -1,5 +1,9 @@
+var config = require('config.json')('../config.json');
+
+console.log(config.match_pool.LOOP_TIME);
+
 /**
- * Pool that contains all matches
+ *  Match Pool parameters
  */
 let MAX_CAPACITY_POOL = 1000;
 let MATCH_TTL_IN_SECONDS = 60;
@@ -82,7 +86,7 @@ class MatchPool{
         console.log('Stop Match Revision Loop operation');
     }
 
-
+    
 }
 
 module.exports = MatchPool;
